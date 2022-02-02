@@ -13,6 +13,11 @@ public:
 		int r = B.size();
 		int s = B[0].size();
 
+		if (q != r) {
+			cout << "Matrix multiplication is not possible" << "\n";
+			return;
+		}
+
 		int k = max({p, q, r, s});
 
 		int n = next2thPower(k);
