@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ public:
         size++;
         bubbleUp();
     }
+
+    bool isEmpty() { return size == 0; }
 
     int top() {
         if (size == 0) return INT_MIN;
