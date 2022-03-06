@@ -10,6 +10,9 @@
 ### Above combination will ignore all files without extension ###
 .vscode/
 
+# input files.
+input.txt
+
 # Prerequisites
 *.d
 
