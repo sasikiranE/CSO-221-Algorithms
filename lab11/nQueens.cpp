@@ -3,39 +3,52 @@
 using namespace std;
 
 int n;
-vector<vector<char>> grid;
+vector<vector<char>> board;
 vector<bool> col, diag1, diag2;
 int ans = 0;
+vector<vector<vector<char>>> solution;
 
-void solve(int x) {
+void placeQueen(int x) {
 	if (x == n) {
 		ans++;
+		solution.push_back(board);
 		return;
 	}
 	for (int y = 0; y < n; y++) {
-		if (col[y] or diag1[x + y] or diag2[y - x + n - 1] or grid[x][y] == '*') continue;
+		if (col[y] or diag1[x + y] or diag2[y - x + n - 1] or board[x][y] == '*') continue;
+		board[x][y] = '*';
 		col[y] = diag1[x + y] = diag2[y - x + n - 1] = true;
-		solve(x + 1);
+		placeQueen(x + 1);
+		board[x][y] = '.';
 		col[y] = diag1[x + y] = diag2[y - x + n - 1] = false;
+	}
+}
+
+void printBoard(vector<vector<char>> &board) {
+	for (int i = 0; i < board.size(); i++) {
+		for (int j = 0; j < board.size(); j++) {
+			cout << board[i][j] << " ";
+		}
+		cout << "\n";
 	}
 }
 
 int main() {
 	cin >> n;
 	
-	grid.resize(n, vector<char>(n));
+	board.resize(n, vector<char>(n, '.'));
 	col.assign(n, false);
 	diag1.assign(n, false);
 	diag2.assign(n, false);
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cin >> grid[i][j];
-		}
+	placeQueen(0);
+
+	cout << "No of solutions : " << ans << "\n";
+
+	for (int k = 0; k < solution.size(); k++) {
+		printBoard(solution[k]);
+		cout << "\n";
 	}
 
-	solve(0);
-
-	cout << ans << "\n";
 	return 0;
 }
