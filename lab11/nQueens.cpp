@@ -36,10 +36,10 @@ void printBoard(vector<vector<char>> &board) {
 int main() {
 	cin >> n;
 	
-	board.resize(n, vector<char>(n, '.'));
+	board.assign(n, vector<char>(n, '.'));
 	col.assign(n, false);
-	diag1.assign(n, false);
-	diag2.assign(n, false);
+	diag1.assign(2 * n - 1, false);
+	diag2.assign(2 * n - 1, false);
 
 	placeQueen(0);
 
